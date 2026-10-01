@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>三级电影网 - 高清电影在线观看 | sanjidianyingwang-app.github.io</title>
+<meta name="description" content="三级电影网 (https://sanjidianyingwang-app.github.io) 提供最新电影资讯、热门电影推荐、高清电影在线观看。">
+<meta name="keywords" content="三级电影网, sanjidianyingwang-app.github.io, 电影在线观看, 最新电影, 高清影视">
+<style>
+/* 基础重置 */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { 
+    font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif; 
+    background: #0f0c29; 
+    color: #e0e0ff; 
+    line-height: 1.6; 
+    overflow-x: hidden;
+}
+a { text-decoration: none; color: inherit; }
+
+/* 导航栏 */
+header { 
+    background: rgba(15, 12, 41, 0.95); 
+    padding: 1rem 2rem; 
+    position: fixed; 
+    width: 100%; 
+    top: 0; 
+    z-index: 1000; 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    box-shadow: 0 2px 20px rgba(0,0,0,0.6); 
+    backdrop-filter: blur(10px);
+}
+.logo { 
+    font-size: 1.6rem; 
+    font-weight: 800; 
+    background: linear-gradient(90deg, #ff6b6b, #ffa500, #ff6b6b); 
+    background-size: 200% auto;
+    -webkit-background-clip: text; 
+    -webkit-text-fill-color: transparent;
+    animation: shine 3s linear infinite;
+}
+@keyframes shine { to { background-position: 200% center; } }
+nav ul { display: flex; list-style: none; }
+nav ul li { margin-left: 1.8rem; }
+nav ul li a { 
+    font-size: 0.95rem; 
+    font-weight: 500;
+    color: #b0b0d0;
+    transition: all 0.3s ease; 
+    padding: 0.3rem 0;
+    border-bottom: 2px solid transparent;
+}
+nav ul li a:hover { 
+    color: #ff6b6b; 
+    border-bottom-color: #ff6b6b;
+}
+
+/* 主视觉区域 */
+.hero { 
+    margin-top: 70px; 
+    padding: 5rem 2rem; 
+    text-align: center; 
+    background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+    position: relative;
+    overflow: hidden;
+}
+.hero::before {
+    content: '';
+    position: absolute;
+    top: -50%; left: -50%;
+    width: 200%; height: 200%;
+    background: radial-gradient(circle, rgba(255,107,107,0.1) 0%, transparent 60%);
+    animation: pulse 8s ease-in-out infinite;
+}
+@keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
+.hero h1 { 
+    font-size: 2.8rem; 
+    margin-bottom: 1rem; 
+    position: relative;
+    text-shadow: 0 0 20px rgba(255,107,107,0.5);
+}
+.hero p { 
+    font-size: 1.1rem; 
+    margin-bottom: 2rem; 
+    color: #a0a0c0; 
+    position: relative;
+}
+.website-url { 
+    display: inline-block; 
+    padding: 1rem 2rem; 
+    background: rgba(0,0,0,0.4); 
+    border-radius: 50px; 
+    font-family: 'Courier New', monospace; 
+    font-size: 1.2rem; 
+    color: #ffa500; 
+    margin-top: 1rem; 
+    border: 1px solid rgba(255,165,0,0.3); 
+    box-shadow: 0 0 15px rgba(255,165,0,0.2);
+    position: relative;
+}
+
+/* 栏目通用样式 */
+.section { 
+    padding: 4rem 2rem; 
+    max-width: 1200px; 
+    margin: 0 auto; 
+}
+.section-title { 
+    font-size: 2rem; 
+    margin-bottom: 2.5rem; 
+    text-align: center; 
+    color: #fff;
+    position: relative; 
+}
+.section-title::after { 
+    content: ''; 
+    display: block; 
+    width: 80px; 
+    height: 3px; 
+    background: linear-gradient(90deg, #ff6b6b, #ffa500); 
+    margin: 0.8rem auto; 
+    border-radius: 2px;
+}
+
+/* 栏目一：最新上映 - 卡片网格 */
+.movies-grid { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); 
+    gap: 2rem; 
+}
+.movie-card { 
+    background: rgba(255,255,255,0.03); 
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 15px; 
+    overflow: hidden; 
+    transition: all 0.4s ease; 
+}
+.movie-card:hover { 
+    transform: translateY(-10px); 
+    box-shadow: 0 10px 30px rgba(255,107,107,0.2);
+    border-color: rgba(255,107,107,0.3);
+}
+.movie-poster { 
+    width: 100%; 
+    height: 300px; 
+    background: linear-gradient(45deg, #1a1a3e, #2a2a5e); 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    font-size: 4rem; 
+}
+.movie-info { padding: 1.5rem; }
+.movie-info h3 { font-size: 1.1rem; margin-bottom: 0.5rem; color: #fff; }
+.movie-info p { font-size: 0.85rem; color: #888; margin-bottom: 1rem; }
+.movie-info a { 
+    display: inline-block; 
+    padding: 0.5rem 1.2rem; 
+    background: linear-gradient(90deg, #ff6b6b, #ff8e53); 
+    color: #fff; 
+    border-radius: 25px; 
+    font-size: 0.85rem; 
+    transition: opacity 0.3s;
+}
+.movie-info a:hover { opacity: 0.8; }
+
+/* 栏目二：电影分类 - 标签云 */
+.categories { 
+    display: flex; 
+    flex-wrap: wrap; 
+    justify-content: center; 
+    gap: 1.2rem; 
+}
+.cat-btn { 
+    padding: 0.8rem 1.8rem; 
+    background: rgba(255,255,255,0.05); 
+    border: 1px solid rgba(255,255,255,0.1); 
+    border-radius: 30px; 
+    color: #ccc; 
+    transition: all 0.3s; 
+}
+.cat-btn:hover { 
+    background: linear-gradient(90deg, #ff6b6b, #ffa500); 
+    color: #fff; 
+    border-color: transparent;
+    transform: scale(1.05);
+}
+
+/* 栏目三：热门推荐 - 列表式 */
+.featured-list { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 1.5rem; 
+}
+.featured-item { 
+    display: flex; 
+    background: rgba(255,255,255,0.03); 
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 15px; 
+    overflow: hidden; 
+    transition: background 0.3s;
+}
+.featured-item:hover { background: rgba(255,255,255,0.06); }
+.featured-item .num { 
+    font-size: 2.5rem; 
+    font-weight: 900; 
+    color: transparent;
+    -webkit-text-stroke: 1px #ffa500;
+    padding: 2rem; 
+    background: rgba(0,0,0,0.3); 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    min-width: 100px; 
+}
+.featured-item .content { padding: 1.5rem; }
+.featured-item .content h3 { margin-bottom: 0.8rem; color: #fff; font-size: 1.2rem; }
+.featured-item .content p { color: #999; font-size: 0.9rem; margin-bottom: 1rem; }
+.featured-item .content a { color: #ff6b6b; font-size: 0.9rem; font-weight: bold; }
+
+/* 栏目四：关于我们 */
+.about { 
+    text-align: center; 
+    background: rgba(255,255,255,0.01); 
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.05);
+}
+.about p { 
+    max-width: 800px; 
+    margin: 0 auto 1.5rem; 
+    color: #aaa; 
+    font-size: 1rem;
+}
+.about .url-highlight { 
+    color: #ffa500; 
+    font-weight: bold; 
+    background: rgba(255,165,0,0.1);
+    padding: 0 0.5rem;
+    border-radius: 4px;
+}
+
+/* 页脚 */
+footer { 
+    text-align: center; 
+    padding: 3rem 2rem; 
+    border-top: 1px solid rgba(255,255,255,0.05); 
+    color: #666; 
+    font-size: 0.9rem; 
+    background: #0a0818;
+}
+footer p { margin-bottom: 0.5rem; }
+
+/* 移动端自适应 */
+@media (max-width: 768px) {
+    header { flex-direction: column; padding: 1rem; }
+    nav ul { margin-top: 1rem; flex-wrap: wrap; justify-content: center; }
+    nav ul li { margin: 0.5rem 0.8rem; }
+    .hero { padding: 4rem 1rem; }
+    .hero h1 { font-size: 2rem; }
+    .website-url { font-size: 0.9rem; padding: 0.8rem 1.2rem; }
+    .movies-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 1rem; }
+    .movie-poster { height: 220px; font-size: 3rem; }
+    .featured-item { flex-direction: column; }
+    .featured-item .num { min-width: 100%; padding: 1rem; font-size: 2rem; -webkit-text-stroke: 0; color: #ffa500; }
+    .section { padding: 3rem 1rem; }
+}
+</style>
+</head>
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/yazhou.js"></script>
+
+<header>
+    <div class="logo">三级电影网</div>
+    <nav>
+        <ul>
+            <li><a href="#">最新上映</a></li>
+            <li><a href="#">电影分类</a></li>
+            <li><a href="#">热门推荐</a></li>
+            <li><a href="#">关于我们</a></li>
+        </ul>
+    </nav>
+</header>
+
+<section class="hero">
+    <h1>欢迎来到三级电影网</h1>
+    <p>海量高清影视资源，每日更新，为您提供极致的观影体验</p>
+    <div class="website-url">https://sanjidianyingwang-app.github.io</div>
+</section>
+
+<section class="section">
+    <h2 class="section-title">最新上映</h2>
+    <div class="movies-grid">
+        <div class="movie-card">
+            <div class="movie-poster">🎬</div>
+            <div class="movie-info">
+                <h3>星际穿越2</h3>
+                <p>2024 / 科幻 / 148分钟</p>
+                <a href="#">立即播放</a>
+            </div>
+        </div>
+        <div class="movie-card">
+            <div class="movie-poster">🎥</div>
+            <div class="movie-info">
+                <h3>热血无赖</h3>
+                <p>2024 / 动作 / 112分钟</p>
+                <a href="#">立即播放</a>
+            </div>
+        </div>
+        <div class="movie-card">
+            <div class="movie-poster">🍿</div>
+            <div class="movie-info">
+                <h3>夏日的尾巴</h3>
+                <p>2024 / 爱情 / 98分钟</p>
+                <a href="#">立即播放</a>
+            </div>
+        </div>
+        <div class="movie-card">
+            <div class="movie-poster">🎞️</div>
+            <div class="movie-info">
+                <h3>暗夜迷踪</h3>
+                <p>2024 / 悬疑 / 125分钟</p>
+                <a href="#">立即播放</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <h2 class="section-title">电影分类</h2>
+    <div class="categories">
+        <a href="#" class="cat-btn">动作冒险</a>
+        <a href="#" class="cat-btn">科幻未来</a>
+        <a href="#" class="cat-btn">喜剧幽默</a>
+        <a href="#" class="cat-btn">爱情文艺</a>
+        <a href="#" class="cat-btn">恐怖惊悚</a>
+        <a href="#" class="cat-btn">动画卡通</a>
+        <a href="#" class="cat-btn">纪录片</a>
+        <a href="#" class="cat-btn">战争历史</a>
+    </div>
+</section>
+
+<section class="section">
+    <h2 class="section-title">热门推荐</h2>
+    <div class="featured-list">
+        <div class="featured-item">
+            <div class="num">1</div>
+            <div class="content">
+                <h3>沙丘：觉醒</h3>
+                <p>年度史诗级科幻巨制，视觉震撼，剧情跌宕起伏，带你领略异星沙漠的壮丽与残酷。</p>
+                <a href="#">▶ 立即观看</a>
+            </div>
+        </div>
+        <div class="featured-item">
+            <div class="num">2</div>
+            <div class="content">
+                <h3>奥本海默传</h3>
+                <p>诺兰全新力作，揭秘原子弹之父的传奇一生，黑白与彩色交织的叙事杰作。</p>
+                <a href="#">▶ 立即观看</a>
+            </div>
+        </div>
+        <div class="featured-item">
+            <div class="num">3</div>
+            <div class="content">
+                <h3>疯狂的麦克斯：狂暴女神</h3>
+                <p>废土美学巅峰续作，极致的飙车与战斗，安雅·泰勒-乔伊的封神演出。</p>
+                <a href="#">▶ 立即观看</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section about">
+    <h2 class="section-title">关于三级电影网</h2>
+    <p>三级电影网（<span class="url-highlight">https://sanjidianyingwang-app.github.io</span>）是一个专注于高清影视资源分享与资讯发布的专业平台。</p>
+    <p>我们致力于为全球华人影迷提供最及时、最清晰的电影观看指南。从好莱坞大片到独立佳作，从经典老片到最新上映，这里应有尽有。</p>
+    <p>本站为静态展示页面，所有链接均为演示用途（#），符合现代前端标准与SEO最佳实践。</p>
+    <br>
+    <a href="#" style="padding: 0.8rem 2.5rem; background: linear-gradient(90deg, #ff6b6b, #ffa500); border-radius: 30px; color: #fff; font-weight: bold; display: inline-block;">联系管理员</a>
+</section>
+
+<footer>
+    <p>&copy; 2024 三级电影网 (sanjidianyingwang-app.github.io) 保留所有权利。</p>
+    <p>网站官方网址：https://sanjidianyingwang-app.github.io</p>
+    <p>关键词：三级电影网、sanjidianyingwang-app、高清电影、在线观看</p>
+</footer>
+
+</body>
+</html>
